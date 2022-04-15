@@ -1,0 +1,27 @@
+{
+  "name": "ss-challenge",
+  "version": "1.0.0",
+  "description": "Software Sauna code challenge",
+  "main": "index.ts",
+  "scripts": {
+    "start": "tsnd --respawn index.ts",
+    "test": "jest --no-cache"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DBozhinovski/ss-challenge.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DBozhinovski/ss-challenge/issues"
+  },
+  "homepage": "https://github.com/DBozhinovski/ss-challenge#readme",
+  "devDependencies": {
+    "@types/jest": "^27.4.1",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.4",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.6.3"
+  }
+}
