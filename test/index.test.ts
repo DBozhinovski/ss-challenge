@@ -10,6 +10,9 @@ const mapPaths: { [key: string]: string } = {
   multipleStarts1: `${__dirname}/maps/multipleStarts1.txt`,
   multipleStarts2: `${__dirname}/maps/multipleStarts2.txt`,
   multipleStarts3: `${__dirname}/maps/multipleStarts3.txt`,
+  fork: `${__dirname}/maps/fork.txt`,
+  fakeTurn: `${__dirname}/maps/fakeTurn.txt`,
+  multipleStartPaths: `${__dirname}/maps/multipleStartPaths.txt`,
 };
 
 const maps: { [key: string]: InputMap } = {};
@@ -65,5 +68,23 @@ describe('Multiple starts maps:', () => {
 
   test('Expect map 3 to be invalid:', () => {
     expect(validateMap(maps.multipleStarts3)).toBe(false);
+  });
+});
+
+describe('Expect fork map to:', () => {
+  test('be invalid', () => {
+    expect(validateMap(maps.fork)).toBe(false);
+  });
+});
+
+describe('Expect fake turn map to:', () => {
+  test('be invalid', () => {
+    expect(validateMap(maps.fakeTurn)).toBe(false);
+  });
+});
+
+describe('Expect multiple start paths map:', () => {
+  test('be invalid', () => {
+    expect(validateMap(maps.multipleStartPaths)).toBe(false);
   });
 });

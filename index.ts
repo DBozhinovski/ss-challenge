@@ -1,17 +1,29 @@
 import { InputMap } from "./types/InputMap";
 import { countChars } from "./util/countChars";
+import { findForksAndFakeTurns } from "./util/validateTurns";
+import { hasMultipleStartingPaths } from "./util/checkStartingPaths";
 
 export const validateMap = (input: InputMap) => {
   const startsCount = countChars(input, '@');
   const endsCount = countChars(input, 'x');
 
   if (startsCount !== 1) {
-    console.error('Map invalid - wrong number of start chars.');
     return false;
   }
 
   if (endsCount !== 1) {
-    console.error('Map invalid - wrong number of end chars.');
+    return false;
+  }
+
+  const hasForks = findForksAndFakeTurns(input);
+
+  if (hasForks) {
+    return false;
+  }
+
+  const startFork = hasMultipleStartingPaths(input);
+
+  if (startFork) {
     return false;
   }
 
