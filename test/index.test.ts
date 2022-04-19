@@ -1,6 +1,6 @@
 import { readFile } from 'fs/promises';
 
-import { walk, validateMap } from '../index';
+import { run, validateMap } from '../index';
 import { InputMap } from '../types/InputMap';
 
 const mapPaths: { [key: string]: string } = {
@@ -13,6 +13,10 @@ const mapPaths: { [key: string]: string } = {
   fork: `${__dirname}/maps/fork.txt`,
   fakeTurn: `${__dirname}/maps/fakeTurn.txt`,
   multipleStartPaths: `${__dirname}/maps/multipleStartPaths.txt`,
+  intersections: `${__dirname}/maps/intersections.txt`,
+  letterTurn: `${__dirname}/maps/letterTurn.txt`,
+  doubleLetter: `${__dirname}/maps/doubleLetter.txt`,
+  compactSpace: `${__dirname}/maps/compactSpace.txt`,
 };
 
 const maps: { [key: string]: InputMap } = {};
@@ -40,9 +44,12 @@ describe('Expect basic map to:', () => {
     expect(validateMap(maps.basic)).toBe(true);
   });
 
-  // test('provide correct output', () => {
-  //   expect(walk(maps.basic)).toBe('@---A---+|C|+---+|+-B-x');
-  // })
+  test('provide correct output', () => {
+    expect(run(maps.basic)).toEqual({
+      path: '@---A---+|C|+---+|+-B-x',
+      letters: 'ACB'
+    });
+  })
 });
 
 describe('Expect missing start map to:', () => {
@@ -58,15 +65,15 @@ describe('Expect missing end map to:', () => {
 });
 
 describe('Multiple starts maps:', () => {
-  test('Expect map 1 to be invalid:', () => {
+  test('Expect map 1 to be invalid', () => {
     expect(validateMap(maps.multipleStarts1)).toBe(false);
   });
 
-  test('Expect map 2 to be invalid:', () => {
+  test('Expect map 2 to be invalid', () => {
     expect(validateMap(maps.multipleStarts2)).toBe(false);
   });
 
-  test('Expect map 3 to be invalid:', () => {
+  test('Expect map 3 to be invalid', () => {
     expect(validateMap(maps.multipleStarts3)).toBe(false);
   });
 });
@@ -86,5 +93,57 @@ describe('Expect fake turn map to:', () => {
 describe('Expect multiple start paths map:', () => {
   test('be invalid', () => {
     expect(validateMap(maps.multipleStartPaths)).toBe(false);
+  });
+});
+
+describe('Expect intersection map to:', () => {
+  test('be valid', () => {
+    expect(validateMap(maps.intersections)).toBe(true);
+  });
+
+  test('provide correct output', () => {
+    expect(run(maps.intersections)).toEqual({
+      path: '@|A+---B--+|+--C-+|-||+---D--+|x',
+      letters: 'ABCD'
+    });
+  });
+});
+
+describe('Expect letter turn map to:', () => {
+  test('be valid', () => {
+    expect(validateMap(maps.letterTurn)).toBe(true);
+  });
+
+  test('provide correct output', () => {
+    expect(run(maps.letterTurn)).toEqual({
+      path: '@---A---+|||C---+|+-B-x',
+      letters: 'ACB'
+    });
+  });
+});
+
+describe('Expect double letter map to:', () => {
+  test('be valid', () => {
+    expect(validateMap(maps.doubleLetter)).toBe(true);
+  });
+
+  test('provide correct output', () => {
+    expect(run(maps.doubleLetter)).toEqual({
+      path: '@-G-O-+|+-+|O||+-O-N-+|I|+-+|+-I-+|ES|x',
+      letters: 'GOONIES'
+    });
+  });
+});
+
+describe('Expect compact space map to:', () => {
+  test('be valid', () => {
+    expect(validateMap(maps.compactSpace)).toBe(true);
+  });
+
+  test('provide correct output', () => {
+    expect(run(maps.compactSpace)).toEqual({
+      path: '@-G-O-+|+-+|O||+-O-N-+|I|+-+|+-I-+|ES|x',
+      letters: 'GOONIES'
+    });
   });
 });

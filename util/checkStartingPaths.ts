@@ -7,8 +7,6 @@ export const hasMultipleStartingPaths = (input: InputMap) => {
   // We've already eliminated multiple starts, so it's safe to assume that we're only dealing with a single starting point
   const neighborCoordinates = getNeighbors(input, startCoordinates[0]);
 
-  // console.log(neighborCoordinates);
-
   const filledNeighbors = neighborCoordinates.filter((coordinates) => {
     const target = input[coordinates[1]][coordinates[0]];
 
