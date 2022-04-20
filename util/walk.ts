@@ -105,7 +105,12 @@ export const walk = (input: InputMap) => {
 
   const start = findSymbols(input, '@');
 
-  collectAndMove(input, start[0]);
+  try {
+    collectAndMove(input, start[0]);
+  } catch {
+    // Basically, there's a hole in the path. The only non-practical case to catch in the validation step
+    throw new Error('Map not valid; Aborting.');
+  }
 
   return {
     path: data.path,

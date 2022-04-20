@@ -20,6 +20,7 @@ const mapPaths: { [key: string]: string } = {
   doubleLetter: `${__dirname}/maps/doubleLetter.txt`,
   compactSpace: `${__dirname}/maps/compactSpace.txt`,
   lettersAfterEnd: `${__dirname}/maps/lettersAfterEnd.txt`,
+  brokenPath: `${__dirname}/maps/brokenPath.txt`,
 };
 
 const maps: { [key: string]: InputMap } = {};
@@ -161,5 +162,17 @@ describe('Expect letters after end map to:', () => {
       path: '@-A--+|+-B--x',
       letters: 'AB',
     });
+  });
+});
+
+describe('Expect broken path map to:', () => {
+  test('be (false) valid', () => {
+    expect(validateMap(maps.brokenPath)).toBe(true);
+  });
+
+  test('run to throw', () => {
+    expect(() => {
+      run(maps.brokenPath);
+    }).toThrowError('Map not valid; Aborting.');
   });
 });
