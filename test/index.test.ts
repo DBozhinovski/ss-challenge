@@ -28,7 +28,7 @@ const parseMap = (input: string) => {
   });
 
   return map;
-}
+};
 
 beforeAll(async () => {
   const promises = Object.keys(mapPaths).map(async (k) => {
@@ -47,9 +47,9 @@ describe('Expect basic map to:', () => {
   test('provide correct output', () => {
     expect(run(maps.basic)).toEqual({
       path: '@---A---+|C|+---+|+-B-x',
-      letters: 'ACB'
+      letters: 'ACB',
     });
-  })
+  });
 });
 
 describe('Expect missing start map to:', () => {
@@ -104,7 +104,7 @@ describe('Expect intersection map to:', () => {
   test('provide correct output', () => {
     expect(run(maps.intersections)).toEqual({
       path: '@|A+---B--+|+--C-+|-||+---D--+|x',
-      letters: 'ABCD'
+      letters: 'ABCD',
     });
   });
 });
@@ -117,7 +117,7 @@ describe('Expect letter turn map to:', () => {
   test('provide correct output', () => {
     expect(run(maps.letterTurn)).toEqual({
       path: '@---A---+|||C---+|+-B-x',
-      letters: 'ACB'
+      letters: 'ACB',
     });
   });
 });
@@ -130,7 +130,7 @@ describe('Expect double letter map to:', () => {
   test('provide correct output', () => {
     expect(run(maps.doubleLetter)).toEqual({
       path: '@-G-O-+|+-+|O||+-O-N-+|I|+-+|+-I-+|ES|x',
-      letters: 'GOONIES'
+      letters: 'GOONIES',
     });
   });
 });
@@ -143,7 +143,7 @@ describe('Expect compact space map to:', () => {
   test('provide correct output', () => {
     expect(run(maps.compactSpace)).toEqual({
       path: '@-G-O-+|+-+|O||+-O-N-+|I|+-+|+-I-+|ES|x',
-      letters: 'GOONIES'
+      letters: 'GOONIES',
     });
   });
 });

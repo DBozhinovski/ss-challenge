@@ -1,4 +1,4 @@
-import { InputMap } from "../types/InputMap";
+import { InputMap } from '../types/InputMap';
 
 export const findSymbols = (input: InputMap, symbolToFind: string) => {
   const turns = input.reduce((a, b, y) => {

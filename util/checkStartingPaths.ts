@@ -1,6 +1,6 @@
-import { InputMap } from "../types/InputMap";
-import { findSymbols } from "./findSymbols";
-import { getNeighbors } from "./getNeighbors";
+import { InputMap } from '../types/InputMap';
+import { findSymbols } from './findSymbols';
+import { getNeighbors } from './getNeighbors';
 
 export const hasMultipleStartingPaths = (input: InputMap) => {
   const startCoordinates = findSymbols(input, '@');
@@ -22,4 +22,4 @@ export const hasMultipleStartingPaths = (input: InputMap) => {
   }
 
   return false;
-}
+};

@@ -1,14 +1,14 @@
-import { InputMap } from "../types/InputMap";
-import { calculateSkip } from "./calculateSkip";
-import { findSymbols } from "./findSymbols";
-import { getNeighbors } from "./getNeighbors";
+import { InputMap } from '../types/InputMap';
+import { calculateSkip } from './calculateSkip';
+import { findSymbols } from './findSymbols';
+import { getNeighbors } from './getNeighbors';
 
 const data = {
   walking: true,
   path: '',
   letters: '',
-  passed: [] as Array<[number, number]>
-}
+  passed: [] as Array<[number, number]>,
+};
 
 const moveTo = (input: InputMap, coordinates: [number, number]): [number, number] => {
   const currentSymbol = input[coordinates[1]][coordinates[0]];
@@ -50,10 +50,10 @@ const moveTo = (input: InputMap, coordinates: [number, number]): [number, number
       const previousCoordinates = data.passed[data.passed.length - 1];
       const previousSymbol = input[previousCoordinates[1]][previousCoordinates[0]];
 
-      console.log('previous:', previousSymbol)
+      console.log('previous:', previousSymbol);
       console.log('current:', currentSymbol);
 
-      next.forEach(n => console.log('next:', input[n[1]][n[0]]));
+      next.forEach((n) => console.log('next:', input[n[1]][n[0]]));
 
       // Try finding a symbol in next that's identical to current
       const hasIdenticalNext = next.find((nCoordinates) => {
@@ -71,7 +71,7 @@ const moveTo = (input: InputMap, coordinates: [number, number]): [number, number
   // We just skip over, or rather, brute force to the crossover position
   const nextWithSkip = calculateSkip(data.passed[data.passed.length - 1], coordinates);
   return nextWithSkip as [number, number];
-}
+};
 
 const collectAndMove = (input: InputMap, currentPosition: [number, number]) => {
   const next: [number, number] = moveTo(input, currentPosition);
@@ -84,7 +84,7 @@ const collectAndMove = (input: InputMap, currentPosition: [number, number]) => {
     });
 
     if (!passed) {
-      data.letters = `${data.letters}${currentSymbol}`
+      data.letters = `${data.letters}${currentSymbol}`;
     }
   }
 
@@ -97,7 +97,7 @@ const collectAndMove = (input: InputMap, currentPosition: [number, number]) => {
   } else {
     collectAndMove(input, next);
   }
-}
+};
 
 export const walk = (input: InputMap) => {
   // Reset from previous run, as it bit me in the a** on the intersection test
@@ -119,4 +119,4 @@ export const walk = (input: InputMap) => {
     path: data.path,
     letters: data.letters,
   };
-}
+};

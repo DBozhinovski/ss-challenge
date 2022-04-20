@@ -8,4 +8,4 @@ export const calculateSkip = (previous: [number, number], current: [number, numb
   } else if (previous[1] < current[1]) {
     return [current[0], current[1] + 1];
   }
-}
+};

@@ -1,4 +1,4 @@
-import { InputMap } from "../types/InputMap";
+import { InputMap } from '../types/InputMap';
 
 export const getNeighbors = (input: InputMap, coordinates: [number, number]) => {
   const width = input[0].length - 1;
@@ -8,8 +8,8 @@ export const getNeighbors = (input: InputMap, coordinates: [number, number]) => 
 
   if (coordinates[0] > 0) {
     neighborCoordinates.push([coordinates[0] - 1, coordinates[1]]);
-  } 
-  
+  }
+
   if (coordinates[0] < width) {
     neighborCoordinates.push([coordinates[0] + 1, coordinates[1]]);
   }
@@ -23,4 +23,4 @@ export const getNeighbors = (input: InputMap, coordinates: [number, number]) => 
   }
 
   return neighborCoordinates;
-}
+};

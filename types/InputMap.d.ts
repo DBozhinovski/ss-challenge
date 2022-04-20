@@ -1,1 +1,1 @@
-export type InputMap = Array<Array<string>>
+export type InputMap = Array<Array<string>>;

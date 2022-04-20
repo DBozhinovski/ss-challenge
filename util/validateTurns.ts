@@ -1,13 +1,17 @@
-import { InputMap } from "../types/InputMap";
-import { findSymbols } from "./findSymbols";
-import { getNeighbors } from "./getNeighbors";
+import { InputMap } from '../types/InputMap';
+import { findSymbols } from './findSymbols';
+import { getNeighbors } from './getNeighbors';
 
-const countValidNeighborMoves = (input: InputMap, coordinates: [number, number], filledNeighbors: [number, number][]) => {
+const countValidNeighborMoves = (
+  input: InputMap,
+  coordinates: [number, number],
+  filledNeighbors: [number, number][],
+) => {
   let count = 0;
 
   filledNeighbors.forEach((fCoordinates) => {
     const targetSymbol = input[fCoordinates[1]][fCoordinates[0]];
-    
+
     if (targetSymbol !== '-' && fCoordinates[1] !== coordinates[1]) {
       count++;
     } else if (targetSymbol !== '|' && fCoordinates[0] !== coordinates[0]) {
@@ -16,11 +20,11 @@ const countValidNeighborMoves = (input: InputMap, coordinates: [number, number],
   });
 
   return count;
-}
+};
 
 export const findForksAndFakeTurns = (input: InputMap) => {
   const turnCoordinates = findSymbols(input, '+');
- 
+
   console.log('==HASFORKS==');
   console.table(input);
   // Going to perf. hell for this one :D
@@ -63,17 +67,20 @@ export const findForksAndFakeTurns = (input: InputMap) => {
       }
     });
 
-    const countNeighborsOnSameAxis = filledNeighbors.reduce((counters, filledCoordinates) => {
-      if (coordinates[0] === filledCoordinates[0]) {
-        counters[0]++;
-      }
+    const countNeighborsOnSameAxis = filledNeighbors.reduce(
+      (counters, filledCoordinates) => {
+        if (coordinates[0] === filledCoordinates[0]) {
+          counters[0]++;
+        }
 
-      if (coordinates[1] === filledCoordinates[1])  {
-        counters[1]++;
-      }
+        if (coordinates[1] === filledCoordinates[1]) {
+          counters[1]++;
+        }
 
-      return counters;
-    }, [0, 0]);
+        return counters;
+      },
+      [0, 0],
+    );
 
     if (countNeighborsOnSameAxis[0] > 1 || countNeighborsOnSameAxis[1] > 1) {
       // Check whether we're running in a compact space -.-
@@ -94,4 +101,4 @@ export const findForksAndFakeTurns = (input: InputMap) => {
   console.log('hasFakeTurns', hasFakeTurns);
 
   return hasForks || hasFakeTurns;
-}
+};
