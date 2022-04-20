@@ -103,13 +103,9 @@ export const walk = (input: InputMap) => {
   data.letters = '';
   data.passed = [];
 
-  console.table(input);
-
   const start = findSymbols(input, '@');
 
   collectAndMove(input, start[0]);
-
-  console.log(data.passed);
 
   return {
     path: data.path,

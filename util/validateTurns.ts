@@ -25,8 +25,6 @@ const countValidNeighborMoves = (
 export const findForksAndFakeTurns = (input: InputMap) => {
   const turnCoordinates = findSymbols(input, '+');
 
-  console.log('==HASFORKS==');
-  console.table(input);
   // Going to perf. hell for this one :D
   const hasForks = turnCoordinates.reduce((forksFound: boolean, coordinates) => {
     const neighborCoordinates = getNeighbors(input, coordinates);
@@ -42,16 +40,11 @@ export const findForksAndFakeTurns = (input: InputMap) => {
     if (filledNeighbors.length !== 2) {
       // Check whether we're running in a compact space -.-
       const validMoves = countValidNeighborMoves(input, coordinates, filledNeighbors as [number, number][]);
-      console.log(validMoves);
 
       if (validMoves !== 2) {
         forksFound = true;
       }
     }
-
-    // if (filledNeighbors !== 2) {
-    //   forksFound = true;
-    // }
 
     return forksFound;
   }, false);
@@ -96,9 +89,6 @@ export const findForksAndFakeTurns = (input: InputMap) => {
 
     return fakeTurnsFound;
   }, false);
-
-  console.log('hasForks', hasForks);
-  console.log('hasFakeTurns', hasFakeTurns);
 
   return hasForks || hasFakeTurns;
 };

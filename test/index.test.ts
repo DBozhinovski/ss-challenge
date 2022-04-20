@@ -1,4 +1,6 @@
 import { readFile } from 'fs/promises';
+import util from 'util';
+import console from 'console';
 
 import { run, validateMap } from '../index';
 import { InputMap } from '../types/InputMap';
@@ -17,6 +19,7 @@ const mapPaths: { [key: string]: string } = {
   letterTurn: `${__dirname}/maps/letterTurn.txt`,
   doubleLetter: `${__dirname}/maps/doubleLetter.txt`,
   compactSpace: `${__dirname}/maps/compactSpace.txt`,
+  lettersAfterEnd: `${__dirname}/maps/lettersAfterEnd.txt`,
 };
 
 const maps: { [key: string]: InputMap } = {};
@@ -144,6 +147,19 @@ describe('Expect compact space map to:', () => {
     expect(run(maps.compactSpace)).toEqual({
       path: '@B+++B|+-L-+A+++A-+Hx',
       letters: 'BLAH',
+    });
+  });
+});
+
+describe('Expect letters after end map to:', () => {
+  test('be valid', () => {
+    expect(validateMap(maps.lettersAfterEnd)).toBe(true);
+  });
+
+  test('provide correct output', () => {
+    expect(run(maps.lettersAfterEnd)).toEqual({
+      path: '@-A--+|+-B--x',
+      letters: 'AB',
     });
   });
 });

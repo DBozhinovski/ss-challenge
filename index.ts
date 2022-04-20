@@ -11,22 +11,18 @@ export const validateMap = (input: InputMap) => {
   if (startsCount !== 1) {
     return false;
   }
-  console.log('starts OK');
 
   if (endsCount !== 1) {
     return false;
   }
-  console.log('ends OK');
 
   if (findForksAndFakeTurns(input)) {
     return false;
   }
-  console.log('forks OK');
 
   if (hasMultipleStartingPaths(input)) {
     return false;
   }
-  console.log('start paths OK');
 
   return true;
 };
