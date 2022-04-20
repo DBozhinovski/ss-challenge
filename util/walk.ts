@@ -50,12 +50,7 @@ const moveTo = (input: InputMap, coordinates: [number, number]): [number, number
       const previousCoordinates = data.passed[data.passed.length - 1];
       const previousSymbol = input[previousCoordinates[1]][previousCoordinates[0]];
 
-      console.log('previous:', previousSymbol);
-      console.log('current:', currentSymbol);
-
-      next.forEach((n) => console.log('next:', input[n[1]][n[0]]));
-
-      // Try finding a symbol in next that's identical to current
+      // Try finding a symbol in next that's identical to current to maintain direction
       const hasIdenticalNext = next.find((nCoordinates) => {
         return currentSymbol === input[nCoordinates[1]][nCoordinates[0]];
       });
@@ -69,7 +64,7 @@ const moveTo = (input: InputMap, coordinates: [number, number]): [number, number
   // Calculate skip; We do a little hacking XD
   // Basically, if we haven't found where to move to (ie. next is empty, meaning we passed all possible fields)
   // We just skip over, or rather, brute force to the crossover position
-  const nextWithSkip = calculateSkip(data.passed[data.passed.length - 1], coordinates);
+  const nextWithSkip = calculateSkip(data.passed[data.passed.length - 1], coordinates, currentSymbol === '+');
   return nextWithSkip as [number, number];
 };
 
@@ -91,6 +86,7 @@ const collectAndMove = (input: InputMap, currentPosition: [number, number]) => {
   data.path = `${data.path}${currentSymbol}`;
   data.passed.push(currentPosition);
 
+  // We're done here
   if (currentSymbol === 'x') {
     data.walking = false;
     return;

@@ -142,8 +142,8 @@ describe('Expect compact space map to:', () => {
 
   test('provide correct output', () => {
     expect(run(maps.compactSpace)).toEqual({
-      path: '@-G-O-+|+-+|O||+-O-N-+|I|+-+|+-I-+|ES|x',
-      letters: 'GOONIES',
+      path: '@B+++B|+-L-+A+++A-+Hx',
+      letters: 'BLAH',
     });
   });
 });
